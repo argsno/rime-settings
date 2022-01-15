@@ -19,7 +19,7 @@ patch:
       Shift_R: noop
       Control_L: noop
       Control_R: noop
-      Caps_Lock: commit_code
+      Caps_Lock: noop
       Eisu_toggle: clear
   key_binder/bindings: # 设置哪些键可以翻页，需要哪个取消注释即可
     # - { when: composing, accept: Tab, send: Page_Up } # Tab 翻页
