@@ -2,6 +2,8 @@
 # encoding: utf-8
 patch:
   schema/name: 自然码
+  schema/dependencies:
+    - melt_eng
   switches:
     - name: ascii_mode
       reset: 0
@@ -20,6 +22,7 @@ patch:
     - punct_translator
     - script_translator
     - table_translator@custom_phrase
+    - table_translator@melt_eng        # 英文输入
   engine/filters:
     - simplifier@emoji_suggestion
     - simplifier
@@ -84,7 +87,15 @@ patch:
     enable_completion: false
     enable_sentence: false
     initial_quality: 1
-  "engine/translators/@5": table_translator@custom_phrase
+  
+  # 英文输入方案
+  melt_eng:
+    dictionary: melt_eng # 挂载英文主词库 melt_eng.dict.yaml
+    spelling_hints: 9
+    enable_completion: true # 补全提示
+    enable_sentence: false
+    initial_quality: 0 # -1
+  # "engine/translators/@5": table_translator@custom_phrase
 # Rx: BlindingDark/rime-easy-en:customize:schema=double_pinyin_flypy
 # 若要启用 easy_en，取消注释下面两行
   # __include: easy_en:/patch

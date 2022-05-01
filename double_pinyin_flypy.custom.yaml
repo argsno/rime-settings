@@ -1,5 +1,7 @@
 patch:
   schema/name: 小鹤双拼
+  schema/dependencies:
+    - melt_eng
   switches:
     - name: ascii_mode
       reset: 0
@@ -20,6 +22,7 @@ patch:
     - punct_translator
     - script_translator
     - table_translator@custom_phrase
+    - table_translator@melt_eng        # 英文输入
   engine/filters:
     - simplifier@emoji_suggestion
     - simplifier
@@ -40,6 +43,7 @@ patch:
     option_name: emoji_suggestion
     # tips: all
   reverse_lookup: {}
+  speller/alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
 
   #載入朙月拼音擴充詞庫
   'translator/dictionary': luna_pinyin.extended
@@ -81,7 +85,14 @@ patch:
     enable_completion: false
     enable_sentence: false
     initial_quality: 1
-  "engine/translators/@5": table_translator@custom_phrase
+
+  # 英文输入方案
+  melt_eng:
+    dictionary: melt_eng # 挂载英文主词库 melt_eng.dict.yaml
+    spelling_hints: 9
+    enable_completion: true # 补全提示
+    enable_sentence: false
+    initial_quality: 0 # -1
 
 # Rx: BlindingDark/rime-easy-en:customize:schema=double_pinyin_flypy
   # __include: easy_en:/patch
